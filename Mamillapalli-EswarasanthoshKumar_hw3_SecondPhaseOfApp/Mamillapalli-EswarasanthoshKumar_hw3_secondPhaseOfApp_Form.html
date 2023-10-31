@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Mamillapalli-EswarasanthoshKumar_hw3_secondPhaseOfApp_Form.css">
+  <title>Document</title>
+
+</head>
+<body>
+  <div class="main">
+    <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="basicinfo">
+      <form submit="">
+        <label for="chk" aria-hidden="true">Basic information</label>
+        <input type="text" name="fullname" id="fullname" placeholder="Full Name" required="">
+        <input type="email" name="email" id="email" placeholder="Email" required="">
+        <input type="date" name="dob" id="dob" placeholder="Date of birth" required="">
+        <input type="text" name="placeofbirth" id="placeofbirth" placeholder="Place of birth" required="">
+        <label for="chk" aria-hidden="true">More about you</label>
+        <input type="text" name="degree" id="degree" placeholder="Degree" required="">
+        <input type="text" name="workex" id="workex" placeholder="Write about your experience" required="">
+        <input type="text" name="familyinfo" id="familyinfo" placeholder="Write about your family" required="">
+        <input type="text" name="hobbies" id="hobbies" placeholder="Which browser you use and why?" required="">
+        <input type="text" name="futureplan" id="futureplan" placeholder="Do you allow cookies while working"
+          required="">
+        <!-- Current Location -->
+        <input type="text" name="current-city" id="current-city" placeholder="Enter your current city" required="">
+        <input type="text" name="current-country" id="current-country" placeholder="Enter your current country"
+          required="">        
+        <!-- I am from -->
+        <input type="text" name="origin-city" id="origin-city" placeholder="Enter the origin - city" required="">
+        <input type="text" name="origin-country" id="origin-country" placeholder="Enter the origin - country"
+          required="">
+        <!-- I'd like to be in -->
+        <input type="text" name="desired-city" id="desired-city" placeholder="Enter city you'd like to live" required="">
+        <input type="text" name="desired-country" id="desired-country" placeholder="Enter country you'd like to live"
+          required="">
+        <!-- My family is from -->
+        <input type="text" name="family-city" id="family-city" placeholder="Enter family-city" required="">
+        <input type="text" name="family-country" id="family-country" placeholder="Enter family-country"
+          required="">        
+        <!-- Additional Information -->
+        <textarea id="additional-info" name="additional-info" rows="4" placeholder="Share additional details or preferences..."></textarea>
+        <br></br>
+        <input type="file" name="file">
+      </form>
+      <button id="btn">Sign up</button>
+    </div>
+  </div>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
+<script>
+  const id = document.getElementById("btn");
+  id.addEventListener("click", (e) => {
+    let fullname = document.getElementById("fullname").value;
+    let email = document.getElementById("email").value;
+    let dob = document.getElementById("dob").value;
+    let placeofbirth = document.getElementById("placeofbirth").value;
+    let degree = document.getElementById("degree").value;
+    let workex = document.getElementById("workex").value;
+    let familyinfo = document.getElementById("familyinfo").value;
+    let hobbies = document.getElementById("hobbies").value;
+    let futureplan = document.getElementById("futureplan").value;
+    let CurrentCity = document.getElementById("current-city").value;
+    let CurrentCountry = document.getElementById("current-country").value;
+    let OriginCity = document.getElementById("origin-city").value;
+    let OriginCountry = document.getElementById("origin-country").value;
+    let DesiredCity = document.getElementById("desired-city").value;
+    let DesiredCountry = document.getElementById("desired-country").value;
+    let FamilyCity = document.getElementById("family-city").value;
+    let AdditionalInfo = document.getElementById("additional-info").value;
+
+    // Create an object to hold the data
+    const data = {
+      fullname,
+      email,
+      dob,
+      placeofbirth,
+      degree,
+      workex,
+      familyinfo,
+      hobbies,
+      futureplan,
+      CurrentCity,
+      CurrentCountry,
+      OriginCity,
+      OriginCountry,
+      DesiredCity,
+      DesiredCountry,
+      FamilyCity,
+      AdditionalInfo
+    };
+
+    // Convert data to a workbook
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet([data]);
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+    // Save the workbook as an Excel file
+    XLSX.writeFile(wb, "IWS_Result.xlsx");
+
+
+    const url = "https://apispreadsheets.com/import/upload/36c202321007853ee17d3baad781209b"; 
+
+    fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(re => re.json());
+
+    alert("Data has been saved to an Excel file and sent to the server.");
+  });
+</script>
+
+
+</html>
