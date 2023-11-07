@@ -30,8 +30,8 @@ Planned Enhancements:
 5. Crafting a responsive UI for an intuitive dashboard experience.
 6. Responsive integration of Google Maps, tailored to user-selected locales.
 
-Achievements/ Accomplishments:
------------------------
+Achievements/ Accomplishments / I am Proud of below functionalities:
+-------------------------------------------------------------------
 1. I have successfully created the HTML framework for the Sign Up and Login page. 
 
 2. Tried implementing panel functionality. Also applied CSS for the best UI User experience.At first, started implementing two pages login and sign up pages.Then i have took performance issue into consideration and streamlines the both login and sign-up pages. However, while this integration i have faced many of the HTML prototype issues.Took time to fix them and make a stable UI of the login and sign up pages.
