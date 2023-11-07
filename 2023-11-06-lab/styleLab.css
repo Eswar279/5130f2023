@@ -1,0 +1,92 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #e9ecef;
+  padding: 20px;
+}
+
+
+.wrapper {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centers text elements like h2 */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children along the cross axis */
+  align-items: center; /* Center children along the main axis */
+}
+
+.validation-form {
+  margin: 20px 0;
+}
+
+.form-field {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field label {
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ced4da;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-field input:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.submit-btn, .reset-btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.15s ease-in-out;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.submit-btn:hover, .submit-btn:focus {
+  background-color: #0056b3;
+}
+
+.reset-btn {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+.reset-btn:hover, .reset-btn:focus {
+  background-color: #bd2130;
+}
+
+.feedback {
+  font-size: 14px;
+  height: 20px;
+  margin-top: 5px;
+}
+
+.error {
+  color: #dc3545;
+}
+
+.success {
+  color: #28a745;
+}
