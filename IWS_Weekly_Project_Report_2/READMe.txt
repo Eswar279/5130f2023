@@ -33,8 +33,8 @@ Planned Enhancements:
 5. Crafting a responsive UI for an intuitive dashboard experience.
 6. Responsive integration of Google Maps, tailored to user-selected locales.
 
-Achievements/ Accomplishments:
------------------------
+Achievements/ Accomplishments/ I am proud of below accomplishments:
+-------------------------------------------------------------------
 1. I have successfully created the CSS and layouts for the Client page. The use of responsive CSS and JavaScript ensures the website adjusts its layout and content based on the screen size and device, providing an optimal viewing experience for both desktop and mobile users.
 
 2. The events section uses a card layout to present upcoming events, making the information accessible and easy to navigate. This layout is visually appealing and user-friendly.
