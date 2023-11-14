@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: inline-block;
+        }
+
+        label, input, button {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="text"], input[type="password"] {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            fetch('http://ip-api.com/json')
+            .then(response => response.json())
+            .then(data => {
+                const userLocation = data.city;
+                const countryCode = data.countryCode;
+                document.getElementById('location').textContent = userLocation;
+    
+                // Fetching weather data
+                const weatherApiUrl = `https://api.weatherapi.com/v1/current.json?key=fc11e6005ff94cdf89522741231411&q=${userLocation}`;
+                fetch(weatherApiUrl)
+                .then(response => response.json())
+                .then(weatherData => {
+                    document.getElementById('weather').textContent = `${weatherData.current.condition.text}, ${weatherData.current.temp_c}°C`;
+    
+                    // Displaying local time
+                    const timezone = weatherData.location.tz_id;
+                    displayLocalTime(timezone);
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('weather').textContent = 'Unable to fetch weather data';
+                });
+    
+                // Displaying currency, language, and local facts
+                document.getElementById('currency').textContent = getCurrencyByCountry(countryCode);
+                document.getElementById('local-language').textContent = getLocalLanguageByCountry(countryCode);
+                document.getElementById('local-facts').textContent = getLocalFactsByCountry(countryCode);
+            })
+            .catch(error => {
+                console.error('Error fetching location data:', error);
+            });
+        };
+    
+        function displayLocalTime(timezone) {
+            try {
+                const currentTime = new Date().toLocaleTimeString('en-US', {timeZone: timezone});
+                document.getElementById('local-time').textContent = currentTime;
+            } catch (error) {
+                console.error('Error displaying local time:', error);
+                document.getElementById('local-time').textContent = 'Unable to display local time';
+            }
+        }
+    
+        function getCurrencyByCountry(countryCode) {
+            // Simplified implementation
+            return countryCode === 'US' ? 'USD' : 'EUR';
+        }
+    
+        function getLocalLanguageByCountry(countryCode) {
+            // Hypothetical implementation
+            const languages = {
+                'US': 'English',
+                'FR': 'French',
+                'DE': 'German',
+                // Add more countries and languages as needed
+            };
+            return languages[countryCode] || 'Unknown';
+        }
+    
+        function getLocalFactsByCountry(countryCode) {
+            // Hypothetical implementation
+            const facts = {
+                'US': 'Home to the Grand Canyon',
+                'FR': 'Famous for the Eiffel Tower',
+                'DE': 'Known for its beer culture',
+                // Add more countries and facts as needed
+            };
+            return facts[countryCode] || 'No facts available';
+        }
+    </script>
+    
+    
+    
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Log In</button>
+    </form>
+
+    <!-- New sections for displaying location-based information -->
+    <div id="location-info">
+        <h3>Your Location: <span id="location"></span></h3>
+        <p>Weather: <span id="weather"></span></p>
+        <p>Local Time: <span id="local-time"></span></p>
+        <p>Currency: <span id="currency"></span></p>
+        <p>Local Language: <span id="local-language"></span></p>
+        <p>Local Facts: <span id="local-facts"></span></p>
+
+    </div>
+</body>
+</html>
